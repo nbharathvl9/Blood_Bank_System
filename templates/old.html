@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Bank System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Blood Bank System</div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="blur-effect1"></div>
+    <main class="hero">
+        <h1>Welcome to Blood Bank System</h1>
+        <p>Save lives by donating blood or find blood donors near you</p>
+        <div class="button-container">
+            <a href="/donate" class="btn">Donor</a>
+            <a href="/receive" class="btn">Receiver</a>
+        </div>
+    </main>
+
+    <div id="popupOverlay" class="popup-overlay hidden">
+        <div class="popup-content">
+            <span class="close-btn" onclick="popup.hide()">&times;</span>
+            <div id="popupBody"></div>
+        </div>
+    </div>
+
+    <div class="blur-effect2"></div>
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>We are dedicated to providing a reliable and efficient blood bank system. Our mission is to save lives by connecting blood donors with recipients in need. Join us in this noble cause.</p>
+            <div class="social-media">
+                <a href="https://www.linkedin.com" target="_blank"><img src="https://img.icons8.com/?size=256&id=98960&format=png" alt="LinkedIn"></a><br>
+                <a href="https://www.instagram.com" target="_blank"><img src="https://img.icons8.com/?size=256&id=7QPcOVZoGlmf&format=png" alt="Instagram"></a><br>
+                <a href="mailto:info@bloodbanksystem.com"><img src="https://img.icons8.com/?size=100&id=pJJmXPomYuPv&format=png&color=000000" alt="Mail"></a><br>
+            </div>
+        </div>
+        <div class="additional-info">
+            <h3>Blood Type Compatibility</h3> <br>
+            <p>Below is a table showing which blood types can donate to and receive from other blood types.</p><br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Blood Type</th>
+                        <th>Can Donate To</th>
+                        <th>Can Receive From</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A+</td>
+                        <td>A+, AB+</td>
+                        <td>A+, A-, O+, O-</td>
+                    </tr>
+                    <tr>
+                        <td>O+</td>
+                        <td>O+, A+, B+, AB+</td>
+                        <td>O+, O-</td>
+                    </tr>
+                    <tr>
+                        <td>B+</td>
+                        <td>B+, AB+</td>
+                        <td>B+, B-, O+, O-</td>
+                    </tr>
+                    <tr>
+                        <td>AB+</td>
+                        <td>AB+</td>
+                        <td>Everyone</td>
+                    </tr>
+                    <tr>
+                        <td>A-</td>
+                        <td>A+, A-, AB+, AB-</td>
+                        <td>A-, O-</td>
+                    </tr>
+                    <tr>
+                        <td>O-</td>
+                        <td>Everyone</td>
+                        <td>O-</td>
+                    </tr>
+                    <tr>
+                        <td>B-</td>
+                        <td>B+, B-, AB+, AB-</td>
+                        <td>B-, O-</td>
+                    </tr>
+                    <tr>
+                        <td>AB-</td>
+                        <td>AB+, AB-</td>
+                        <td>AB-, A-, B-, O-</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+</html>

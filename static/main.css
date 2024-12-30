@@ -1,0 +1,344 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    background-color: #222222;
+
+}
+
+body{
+    background-color: #212121;
+
+}
+
+/* Navbar styles */
+.navbar {
+    background: linear-gradient(135deg, #3f3e3e 0%,#320202 50%, #000000 100%);
+
+    padding: 1.2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 6px 10px rgba(10, 181, 101, 0.1);
+    border-radius: 0px 0px 15px 15px;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(135deg, #af1313 0%, #790303 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    }
+
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 3rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1.1rem;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Hero section */
+.hero {
+    min-height: calc(100vh - 4rem);
+    padding: 4rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #000000 0%, #434343 100%);
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: -280px;
+    height: 750px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    color: #9da5a7;
+    margin-bottom: 1.5rem;
+    animation: fadeInDown 1s ease;
+}
+
+.hero p {
+    color: #636e72;
+    margin-bottom: 3rem;
+    font-size: 1.2rem;
+    max-width: 600px;
+    line-height: 1.6;
+    animation: fadeInUp 1s ease 0.3s backwards;
+}
+
+/* Blur effects */
+.blur-effect1 {
+    margin-top: 80px;
+    position: relative;
+    width: 400px;
+    height: 200px;
+    background: rgb(67, 6, 6);
+    filter: blur(150px);
+    border-radius: 50%;
+}
+
+.blur-effect2 {
+    margin-left: 1000px;
+    margin-top: -400px;
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    background: rgb(102, 9, 9);
+    filter: blur(150px);
+    border-radius: 50%;
+}
+
+/* Buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease 0.6s backwards;
+}
+
+.btn {
+    padding: 1.2rem 3rem;
+    font-size: 1.2rem;
+    border: none;
+    background-color: #212121;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(-1px);
+}
+
+.donor-btn {
+    background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+    color: white;
+}
+
+.recipient-btn {
+    background: linear-gradient(135deg, #4b7bec 0%, #3867d6 100%);
+    color: white;
+}
+
+
+.blurred {
+    filter: blur(5px);
+}
+
+.about-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 3rem;
+    margin-top: -40px;
+    background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 370px;
+}
+
+.about-section .container {
+    max-width: 40%;
+}
+
+.about-section .additional-info {
+    background: black;
+    color: white;
+    padding: 2rem;
+    max-width: 100%;
+    text-align: left;
+    margin-bottom: 2%;
+    border-radius: 10px;
+    height: 600px;
+    transition: 0.2s ease-in-out;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.about-section .additional-info.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+.about-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-section p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.about-section .social-media {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.about-section .social-media a {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+}
+
+.about-section .social-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 2px; /* Gap between capsules */
+    width: 100%;
+    text-align: left;
+    font-family: Arial, sans-serif;
+}
+
+thead {
+    background-color: #3a3a3a; /* Pinkish orange for header */
+    color: rgb(0, 0, 0);
+    font: bold 20px Arial, sans-serif;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 5px; /* Capsule effect */
+    background-color: #ff0040; /* Light pinkish orange for cells */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Add transition for hover effect */
+}
+
+th {
+    font-weight: bold;
+}
+
+td:hover {
+    background-color: #ff6666; /* Change background color on hover */
+    transform: scale(1.09); /* Slightly enlarge the cell on hover */
+}
+
+th:hover{
+    background-color: #ff6666; /* Change background color on hover */
+    transform: scale(1.15); /* Slightly enlarge the cell on hover */
+}
+
+/* Form styles */
+.user-input-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-input-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.user-input-form input,
+.user-input-form select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.user-input-form .btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-input-form .btn:hover {
+    background-color: #0056b3;
+}
+
+/* Add gap between input boxes */
+.form-container input,
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: block;
+}

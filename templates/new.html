@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New User Registration - Blood Bank System</title>
+    <style>
+        /* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #f7f7f7, #e0e0e0);
+}
+
+/* Navbar Styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #ff4b2b 0%, #ff416c 100%);
+    color: #fff;
+    padding: 10px 20px;
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .nav-links li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.navbar .nav-links li a:hover {
+    text-decoration: underline;
+}
+
+/* Form Container Styles */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: rgba(255, 255, 255, 0.9);
+}
+
+.form-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+}
+
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #b71c1c;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="tel"],
+form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+form input[type="text"]:focus,
+form input[type="date"]:focus,
+form input[type="tel"]:focus,
+form select:focus {
+    outline: none;
+    border-color: #b71c1c;
+    box-shadow: 0 0 5px rgba(183, 28, 28, 0.5);
+}
+
+form .btn {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #b71c1c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+form .btn:hover {
+    background-color: #9c1515;
+}
+
+/* Blur Effect Styles */
+.blur-effect1, .blur-effect2 {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: #b71c1c;
+    filter: blur(100px);
+    z-index: -1;
+}
+
+.blur-effect1 {
+    top: 10%;
+    left: 5%;
+}
+
+.blur-effect2 {
+    bottom: 10%;
+    right: 5%;
+}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">Blood Bank System</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="blur-effect1"></div>
+
+    <main class="hero">
+        <div class="form-container">
+            <h2>Register Yourself</h2>
+            <form id="newUserForm">
+                <label for="aadharNo">Aadhar Number:</label>
+                <input type="text" id="aadharNo" name="aadharNo" required pattern="[0-9]{12}" title="Enter 12-digit Aadhar number">
+
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required>
+
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" title="Enter 10-digit phone number">
+
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                    <option value="O">Other</option>
+                </select>
+
+                <label for="bloodGroup">Blood Group:</label>
+                <select id="bloodGroup" name="bloodGroup" required>
+                    <option value="">Select Blood Group</option>
+                    <option value="A+">A+</option>
+                    <option value="B+">B+</option>
+                    <option value="O+">O+</option>
+                    <option value="AB+">AB+</option>
+                    <option value="A-">A-</option>
+                    <option value="B-">B-</option>
+                    <option value="O-">O-</option>
+                    <option value="AB-">AB-</option>
+                </select>
+
+                <label for="D_no">Door Number:</label>
+                <input type="text" id="D_no" name="D_no">
+
+                <label for="Street_Name">Street Name:</label>
+                <input type="text" id="Street_Name" name="Street_Name">
+
+                <label for="City">City:</label>
+                <input type="text" id="City" name="City">
+
+                <label for="State">State:</label>
+                <input type="text" id="State" name="State">
+
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </div>
+    </main>
+
+    <div class="blur-effect2"></div>~
+
+
+    <script>
+        document.getElementById('newUserForm').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const formData = {
+                aadharNo: document.getElementById('aadharNo').value,
+                fullName: document.getElementById('fullName').value,
+                dob: document.getElementById('dob').value,
+                phone: document.getElementById('phone').value,
+                gender: document.getElementById('gender').value,
+                bloodGroup: document.getElementById('bloodGroup').value,
+                D_no: document.getElementById('D_no').value,
+                Street_Name: document.getElementById('Street_Name').value,
+                City: document.getElementById('City').value,
+                State: document.getElementById('State').value
+            };
+
+            const response = await fetch('/new', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            const result = await response.json();
+            alert(result.message || result.error);
+        });
+    </script>
+    
+</body>
+</html>

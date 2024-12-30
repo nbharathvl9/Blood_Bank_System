@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            color: #ffffff;
+            background-color: #212121;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            display: flex;
+            flex-direction: column;
+            padding-top: 20px;
+        }
+
+        .sidebar a {
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #ecf0f1;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #34495e;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #212121;
+            overflow-y: auto;
+        }
+
+        .card {
+            background: #313131;
+            color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .chart-card {
+            background: #313131;
+            color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+        }
+
+        .styled-table thead tr {
+            background-color: #009879;
+            color: #ffffff;
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: #242424;
+        }
+
+        .styled-table tbody tr:nth-of-type(odd) {
+            background-color: #212121;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #313131;
+        }
+
+        .chart-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #chartCanvas {
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <a href="#" id="totalPersonsBtn">Total Persons</a>
+        <a href="#" id="contactsBtn">Contacts</a>
+        <a href="#" id="addressesBtn">Address</a>
+        <a href="#" id="donorsBtn">Donors</a>
+        <a href="#" id="recipientsBtn">Recipients</a>
+        <a href="#" id="branchDetailsBtn">Branch Details</a>
+    </div>
+
+    <div class="main-content">
+        <h1>Welcome to the Dashboard</h1>
+        <div id="contentSection"></div>
+    </div>
+
+    <div class="chart-card">
+        <h2>Analytics Chart</h2>
+        <div class="chart-container">
+            <canvas id="chartCanvas"></canvas>
+        </div>
+    </div>
+
+    <script>
+        async function fetchData(url, title, columns, mapFunc) {
+            const response = await fetch(url);
+            const data = await response.json();
+            const contentSection = document.getElementById('contentSection');
+
+            let tableHTML = `
+                <div class="card">
+                    <h2>${title}</h2>
+                    <table class="styled-table">
+                        <thead>
+                            <tr>${columns.map(col => `<th>${col}</th>`).join('')}</tr>
+                        </thead>
+                        <tbody>
+                            ${data.map(mapFunc).join('')}
+                        </tbody>
+                    </table>
+                </div>
+            `;
+
+            contentSection.innerHTML = tableHTML;
+        }
+
+        function renderChart(chartTitle, labels, data) {
+            const ctx = document.getElementById('chartCanvas').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: chartTitle,
+                        data: data,
+                        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56'],
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        }
+
+        document.getElementById('totalPersonsBtn').addEventListener('click', () => {
+            fetchData('/total_persons', 'Person Details', ['Name', 'Date of Birth', 'Gender', 'Age', 'Blood Type'], person => `
+                <tr>
+                    <td>${person.name}</td>
+                    <td>${person.dob}</td>
+                    <td>${person.gender}</td>
+                    <td>${person.age} years</td>
+                    <td>${person.bloodType}</td>
+                </tr>`);
+            renderChart('Age Distribution', ['0-18', '19-35', '36+'], [10, 25, 15]);
+        });
+
+        document.getElementById('contactsBtn').addEventListener('click', () => {
+            fetchData('/contacts', 'Contact Details', ['Name', 'Aadhar', 'Contact Number'], contact => `
+                <tr>
+                    <td>${contact.name}</td>
+                    <td>${contact.aadhar}</td>
+                    <td>${contact.contactNumber}</td>
+                </tr>`);
+        });
+
+        document.getElementById('addressesBtn').addEventListener('click', () => {
+            fetchData('/addresses', 'Address Details', ['Aadhar', 'Name', 'Door Number', 'Street Name', 'City', 'State'], address => `
+                <tr>
+                    <td>${address.aadhar}</td>
+                    <td>${address.name}</td>
+                    <td>${address.d_no}</td>
+                    <td>${address.streetName}</td>
+                    <td>${address.city}</td>
+                    <td>${address.state}</td>
+                </tr>`);
+        });
+
+
+        document.getElementById('donorsBtn').addEventListener('click', () => {
+            fetchData('/donors', 'Donor Details', ['Aadhar', 'Name', 'Last Donation Date'], donor => `
+                <tr>
+                    <td>${donor.aadhar}</td>
+                    <td>${donor.name}</td>
+                    <td>${donor.lastDonationDate}</td>
+                </tr>`);
+        });
+
+        document.getElementById('recipientsBtn').addEventListener('click', () => {
+            fetchData('/recipients', 'Recipient Details', ['Aadhar', 'Name', 'Quantity Required', 'Blood Type'], recipient => `
+                <tr>
+                    <td>${recipient.aadhar}</td>
+                    <td>${recipient.name}</td>
+                    <td>${recipient.quantityRequired}</td>
+                    <td>${recipient.bloodType}</td>
+                </tr>`);
+        });
+
+        document.getElementById('branchDetailsBtn').addEventListener('click', () => {
+            fetchData('/branches', 'Branch Details', ['Branch ID', 'Location', 'Inauguration Date', 'Storage Capacity'], branch => `
+                <tr>
+                    <td>${branch.branchId}</td>
+                    <td>${branch.location}</td>
+                    <td>${branch.inaugurationDate}</td>
+                    <td>${branch.storageCapacity}</td>
+                </tr>`);
+        });
+        
+    </script>
+</body>
+</html>
