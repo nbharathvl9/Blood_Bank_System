@@ -39,7 +39,14 @@ CREATE TABLE Branch_BloodType (
     PRIMARY KEY (Branch_ID, Blood_Type)
 );
 
--- 3. Blood Management Table
+-- 3. Donor Management Table
+CREATE TABLE Donor (
+    Donor_ID SERIAL PRIMARY KEY,
+    Aadhar_number BIGINT REFERENCES Person(Aadhar_number) ON DELETE CASCADE,
+    Last_Donation_Date DATE
+);
+
+-- 4. Blood Management Table
 CREATE TABLE Blood_Management (
     Blood_ID SERIAL PRIMARY KEY,
     Blood_Type CHAR(3) CHECK (Blood_Type IN ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')),
@@ -49,16 +56,12 @@ CREATE TABLE Blood_Management (
     Branch_ID INT REFERENCES Branch(Branch_ID) ON DELETE SET NULL
 );
 
--- 4. Donor Management Table
-CREATE TABLE Donor (
-    Donor_ID SERIAL PRIMARY KEY,
-    Last_Donation_Date DATE
-);
-
 -- 5. Recipient Management Table
 CREATE TABLE Recipient (
     Recipient_ID SERIAL PRIMARY KEY,
-    Quantity_Required INT NOT NULL
+    Aadhar_number BIGINT REFERENCES Person(Aadhar_number) ON DELETE CASCADE,
+    Quantity_Required INT NOT NULL,
+    Blood_Type CHAR(3) CHECK (Blood_Type IN ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'))
 );
 
 -- 6. Transactions Table
@@ -82,31 +85,5 @@ CREATE TABLE Blood_Details (
 -- Recipient_Details Table (To remove transitive dependency)
 CREATE TABLE Recipient_Details (
     Recipient_ID INT PRIMARY KEY REFERENCES Recipient(Recipient_ID) ON DELETE CASCADE,
-    Quantity_Required INT NOT NULL
+    Aadhar_number BIGINT REFERENCES Person(Aadhar_number) ON DELETE CASCADE
 );
-
-
-SELECT * FROM Person;
-
-SELECT * FROM Contact;
-
-SELECT * FROM Address;
-
-SELECT * FROM Branch;
-
-SELECT * FROM Branch_BloodType;
-
-SELECT * FROM Blood_Management;
-
-SELECT * FROM Donor;
-
-SELECT * FROM Recipient;
-
-SELECT * FROM Transactions;
-
-SELECT * FROM Blood_Details;
-
-SELECT * FROM Recipient_Details;
-
-
-DROP TABLE IF EXISTS Person;
